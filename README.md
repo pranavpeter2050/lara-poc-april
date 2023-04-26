@@ -2,10 +2,82 @@
 
 <p align="center">
 <a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
+
+## Installing Vue
+
+After setting up a Laravel project as required, we need to pair it with Vue. Open a terminal inside your current Laravel project and run the below command to install Vue.
+
+```bash
+npm install vue@latest vue-loader@latest vue-router
+```
+
+By default, Laravel 10 should be installed with **Vite** as the bundler **Webpack**. If your project folder contains a **vite.config.js** file then it is using **Vite**. If you have a **webpack.mix.js** then it uses **Webpack**
+
+### Setup Vue with Vite
+
+- Inside your `resource/js/app.js` file, add the below code to import the necessary dependencies to setup a Vue.js application and mount it to a specified element on a HTML page.
+
+```javascript
+// Import the createApp function from the Vue library. This function is used to create a new Vue instance.
+import { createApp } from 'vue';
+
+// Imports the "main" Vue component of the application as "app".
+import app from './components/Main.vue'
+
+// Creates a new Vue instance using the createApp function and mounts it to the #app element which will be defined in welcome.blade.php
+createApp(app).mount("#app")
+```
+
+- Define the HTML element where the Vue app will be mounted as shown below. In this case, `resources/views/welcome.blade.php`.
+
+```html
+// welcome.blade.php
+// Remove the existing code inside the <body> tag
+...
+<body class="antialiased">
+    <div id="app"></div>
+
+    @vite('resources/js/app.js')
+</body>
+```
+
+- Created a folder called `components`. Inside this new folder, create a vue file, lets name this `Main.vue`. Fill it with the following code.
+
+```javascript
+<template>
+  <div>
+    <h1>
+      Hello, Entry point here!
+    </h1>
+  </div>
+</template>
+```
+
+- Now, we'll need to `@vitejs/plugin-vue` npm package to enable Vite to handle Vue components (.vue files) by transforming them into JavaScript modules that can be loaded by the browser. Run below command to install it.
+
+```bash
+npm i @vitejs/plugin-vue
+```
+
+- Add the folling lines to `vite.config.js` to import the above plugin.
+
+```javascript
+// vite.config.js
+import vue from '@vitejs/plugin-vue'
+
+export default {
+  plugins: [vue()],
+}
+```
+
+- Now run `npm run dev` to start the Vite server / frontend and `php artisan serve` start the Laravel server / backend in separate terminal inside your project path.
+- By default, Laravel starts at `port 8000` unless we define some other port in the `.env` file. Try opening the URL: <http://127.0.0.1:8000/>
+
+#### References
+
+- [Install Vue 3 In Laravel 9 With Vite | Laravel Vite With Vue 3 | Vite Laravel Vue 3 | #1 HINDI](https://www.youtube.com/watch?v=8_ptB59jcWM&t=2s), it's in Hindi, will update link to English version if it exists.
+- [@vitejs/plugin-vue](https://www.npmjs.com/package/@vitejs/plugin-vue)
 
 ## About Laravel
 
@@ -29,34 +101,6 @@ You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you
 
 If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
 ## Security Vulnerabilities
 
 If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
@@ -64,3 +108,11 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## References
+
+- [PHP Cheatsheet](https://overapi.com/php)
+- [Laravel Documentation](https://laravel.com/docs)
+- [Laravel Bootcamp](https://bootcamp.laravel.com)
+- [Laracasts](https://laracasts.com)
+- [Vue JS - Getting Started](https://vuejs.org/guide/quick-start.html)
