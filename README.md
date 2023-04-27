@@ -23,7 +23,7 @@ By default, Laravel 10 should be installed with **Vite** as the bundler **Webpac
 import { createApp } from 'vue';
 
 // Imports the "main" Vue component of the application as "app".
-import app from './components/Main.vue'
+import app from './layouts/main.vue'
 
 // Creates a new Vue instance using the createApp function and mounts it to the #app element which will be defined in welcome.blade.php
 createApp(app).mount("#app")
@@ -42,7 +42,7 @@ createApp(app).mount("#app")
 </body>
 ```
 
-- Created a folder called `components`. Inside this new folder, create a vue file, lets name this `Main.vue`. Fill it with the following code.
+- Created a folder called `layouts`. Inside this new folder, create a vue file, lets name this `main.vue`. Fill it with the following code.
 
 ```javascript
 <template>
